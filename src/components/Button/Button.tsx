@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Button.module.scss";
 
-type Variant = "started" | "loading" | "finish";
+type Variant = "started" | "finish";
 
 type VariantInfo = {
   variant: Variant;
@@ -10,20 +10,26 @@ type VariantInfo = {
 
 const ButtonVariantsMapping: Record<Variant, VariantInfo> = {
   started: { label: "Start Request", variant: "started" },
-  loading: { label: "Loading...", variant: "loading" },
   finish: { label: "Finish Request", variant: "finish" },
 };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: Variant;
+  onClick: any;
+  loading?: any;
 }
 
-const Button: React.FC<ButtonProps> = ({ variant, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({
+  variant,
+  onClick,
+  loading,
+  ...rest
+}) => {
   const button = ButtonVariantsMapping[variant];
 
   return (
-    <button className={styles[button.variant]} {...rest}>
-      {button.label}
+    <button className={styles[button.variant]} onClick={onClick} {...rest}>
+      {loading ? "Loading..." : button.label}
     </button>
   );
 };
