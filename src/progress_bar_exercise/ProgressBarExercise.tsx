@@ -19,31 +19,47 @@ export default ProgressBarExercise;
 
 // ----------------------------------------------------------------------------------
 
-const Solution = () => {
-  const [data, setData] = useState<Response>();
-  const [loading, setLoading] = useState<boolean>();
+const REQUEST_TIME = 20000;
 
-  const handleStartRequest = async (e: React.SyntheticEvent) => {
+const fakeRequest = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+const Solution = () => {
+  const [progressBarValue, setProgressBarValue] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const handleStartRequest = async () => {
     setLoading(true);
-    e.preventDefault();
-    const data = await fetch(
-      `https://baconipsum.com/api/?type=meat-and-filler`
-    );
-    setData(data);
-    const delay = 1000;
-    await new Promise((resolve) => setTimeout(resolve, delay));
+
+    const timer = setInterval(() => {
+      setProgressBarValue((oldProgress) => {
+        if (oldProgress === 90) {
+          return 90;
+        }
+
+        if (oldProgress === 100) {
+          clearInterval(timer);
+        }
+        console.log({ oldProgress });
+
+        return Math.min(oldProgress + (oldProgress >= 100 ? 0 : 1.5));
+      });
+    }, 250);
+
+    await fakeRequest(REQUEST_TIME);
+    setLoading(false);
+    setProgressBarValue(100);
+    clearInterval(timer);
   };
 
-  const handleFinishRequest = async (e: React.SyntheticEvent) => {
-    const response = await data?.json();
-    setData(response);
+  const handleFinishRequest = () => {
+    setProgressBarValue(100);
+    clearInterval();
     setLoading(false);
   };
 
-  console.log({ data });
   return (
     <div>
-      <ProgressBar />
+      <ProgressBar progressBarValue={progressBarValue} />
       <p>Add solution here</p>
       <Button
         variant="started"
