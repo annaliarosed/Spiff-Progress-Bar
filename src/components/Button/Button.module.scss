@@ -1,0 +1,36 @@
+.started,
+.loading {
+  background-color: white;
+  color: var(--green);
+  border: 1px solid var(--green);
+  padding: 16px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  transition: 0.1s;
+
+  &:hover {
+    border: 2px solid var(--green);
+  }
+
+  &:active {
+    border: 3px solid var(--green);
+  }
+}
+
+.finish {
+  background-color: white;
+  color: var(--red);
+  border: 1px solid var(--red);
+  padding: 16px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  transition: 0.1s;
+
+  &:hover {
+    border: 2px solid var(--red);
+  }
+
+  &:active {
+    border: 3px solid var(--red);
+  }
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import Exercise from "../exercise/Exercise";
+import Button from "../components/Button/Button";
 
 const ProgressBarExercise = () => {
   return (
@@ -18,5 +19,10 @@ export default ProgressBarExercise;
 // ----------------------------------------------------------------------------------
 
 const Solution = () => {
-  return <div>Add solution here</div>;
+  return (
+    <div>
+      <p>Add solution here</p>
+      <Button variant="finish" />
+    </div>
+  );
 };
