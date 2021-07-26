@@ -1,0 +1,11 @@
+.progressBar {
+  height: 6px;
+  background-image: linear-gradient(90deg, var(--sunrise), var(--red));
+  transition-delay: 0s, 3s;
+
+  // to position it at the top of the screen
+  //  while only editing the solution component
+  position: absolute;
+  top: 0;
+  left: 0;
+}
