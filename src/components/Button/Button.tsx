@@ -15,8 +15,8 @@ const ButtonVariantsMapping: Record<Variant, VariantInfo> = {
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: Variant;
-  onClick: any;
-  loading?: any;
+  loading?: boolean;
+  onClick: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({

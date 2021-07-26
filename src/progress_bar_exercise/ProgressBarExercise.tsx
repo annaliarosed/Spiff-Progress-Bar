@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Exercise from "../exercise/Exercise";
 import Button from "../components/Button/Button";
 import ProgressBar from "../components/ProgressBar";
+import styles from "./ProgressBarExercise.module.scss";
 
 const ProgressBarExercise = () => {
   return (
@@ -31,19 +32,20 @@ const Solution = () => {
     setLoading(true);
 
     const timer = setInterval(() => {
-      setProgressBarValue((oldProgress) => {
-        if (oldProgress === 90) {
+      setProgressBarValue((prevProgressBarValue) => {
+        if (prevProgressBarValue === 90) {
           return 90;
         }
 
-        if (oldProgress === 100) {
+        if (prevProgressBarValue === 100) {
           clearInterval(timer);
         }
-        console.log({ oldProgress });
 
-        return Math.min(oldProgress + (oldProgress >= 100 ? 0 : 1.5));
+        return Math.min(
+          prevProgressBarValue + (prevProgressBarValue >= 100 ? 0 : 1)
+        );
       });
-    }, 250);
+    }, 150);
 
     await fakeRequest(REQUEST_TIME);
     setLoading(false);
@@ -61,12 +63,14 @@ const Solution = () => {
     <div>
       <ProgressBar progressBarValue={progressBarValue} />
       <p>Add solution here</p>
-      <Button
-        variant="started"
-        onClick={handleStartRequest}
-        loading={loading}
-      />
-      <Button variant="finish" onClick={handleFinishRequest} />
+      <div className={styles.buttonsWrapper}>
+        <Button
+          variant="started"
+          onClick={handleStartRequest}
+          loading={loading}
+        />
+        <Button variant="finish" onClick={handleFinishRequest} />
+      </div>
     </div>
   );
 };

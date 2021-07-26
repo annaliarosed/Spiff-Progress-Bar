@@ -2,18 +2,20 @@ import React from "react";
 import styles from "./ProgressBar.module.scss";
 
 type ProgressBarProps = {
-  progressBarValue: any;
+  progressBarValue: number;
 };
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ progressBarValue }) => {
   return (
     <div
-      className={`${styles.progressBar}`}
+      data-testid="progressBar"
+      className={styles.progressBar}
       style={{
         width: `${progressBarValue}%`,
         opacity: `${progressBarValue === 100 ? "0" : "1"}`,
+        transition: `width 150ms ease-in, opacity 400ms ease`,
       }}
-    ></div>
+    />
   );
 };
 
