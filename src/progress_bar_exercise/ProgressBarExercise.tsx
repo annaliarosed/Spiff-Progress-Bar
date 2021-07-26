@@ -61,7 +61,10 @@ const Solution = () => {
 
   return (
     <div>
-      <ProgressBar progressBarValue={progressBarValue} />
+      <ProgressBar
+        progressBarValue={progressBarValue}
+        breakPointArray={[20, 50, 80]}
+      />
       <p>Add solution here</p>
       <div className={styles.buttonsWrapper}>
         <Button
